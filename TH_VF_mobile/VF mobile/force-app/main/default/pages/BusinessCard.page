@@ -1,0 +1,46 @@
+<apex:page controller="sendEmail">
+
+      <body>
+            <!-- REQUIRED SLDS WRAPPER -->
+            <div class="slds-scope">
+              <!-- PRIMARY CONTENT WRAPPER -->
+              <div class="myapp">
+                <!-- INPUT FIELD -->
+                <div class="slds-form-element">
+                  <label class="slds-form-element__label slds-text-heading_medium 
+                                slds-p-bottom_medium" for="text-input-id-1">Current User</label>
+                <div class="slds-form-element__control">
+
+                        <dl class="slds-list_horizontal slds-wrap">
+                                <dt class="slds-item_detail slds-truncate" title="First Name">{!$User.FirstName}</dt>
+                                <dd class="slds-item_detail slds-truncate" title="Last Name">{!$User.LastName}</dd>
+                                <dt class="slds-item_detail slds-truncate" title="Email">{!$User.Email}</dt>
+                                <dd class="slds-item_detail slds-truncate" title="Phone number">{!$User.Phone}</dd>
+                                <dd class="slds-item_detail slds-truncate" title="Phone number">{!$User.Title}</dd>
+                        </dl>
+
+
+                        <input type="text" id="userEmail" class="slds-input"> </input>
+                  </div>
+                </div>
+                <!-- / INPUT FIELD -->
+                <!-- BUTTON -->
+                <button class="slds-button_neutral slds-size_1-of-1 
+                               slds-m-top_x-small slds-p-bottom_x-small slds-p-top_x-small" 
+                               onclick="sendUserInfo()">Send</button>
+                <!-- / BUTTON -->
+              </div>
+              <!-- / PRIMARY CONTENT WRAPPER -->
+            </div>
+            <!-- / REQUIRED SLDS WRAPPER -->
+            <!-- JAVASCRIPT -->
+            <script>function sendUserInfo() {
+                  var userEmail = document.getElementById("userEmail").value;
+                  var body = "{!$User.FirstName}";
+                  var subject = "contact";
+                  send();
+                }</script>
+                
+            <!-- / JAVASCRIPT -->
+        </body>  
+</apex:page>
