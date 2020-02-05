@@ -1,0 +1,83 @@
+<aura:component>
+  <aura:attribute name="test_type" type="Test__c" required="true" />
+  <aura:attribute name="question" type="Question__c" />
+  <aura:attribute name="Test_result" type="Test_result__c" />
+  <aura:attribute name="answer" type="Answer__c" required="true" />
+  <aura:attribute name="Answer_results" type="Answer_result__c[]" />
+    
+  <aura:if isTrue="{!v.question.Answer_option__c=='Checkbox'}">
+    <div class="c-container">
+      <lightning:layout>
+        <lightning:layoutItem
+          padding="around-small"
+          flexibility="auto, no-grow"
+        >
+          <div class="custom-box">
+            <ui:inputCheckbox
+              aura:id="checkbox"
+              label=""
+              change="{!c.AddCheckedAnswer}"
+            />
+
+          </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem
+          padding="around-small"
+          flexibility="auto, no-grow"
+        >
+          <div class="custom-box">
+            <!--<lightning:formattedText value="{!v.answer.Name}" />-->
+            <a href="{!'/one/one.app?#/sObject/'+ v.answer.Id + '/view'}" target="_blank">{!v.answer.Name}</a>  
+          </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small" flexibility="auto">
+          <div class="custom-box">
+            <lightning:formattedRichText
+              value="{!v.answer.Full_body_answer__c}"
+            />
+          </div>
+        </lightning:layoutItem>
+      </lightning:layout>
+    </div>
+
+    <aura:set attribute="else">
+      <div class="c-container">
+        <lightning:layout>
+          <lightning:layoutItem
+            padding="around-small"
+            flexibility="auto, no-grow"
+          >
+            <div class="custom-box">
+                <!--<span class="slds-radio">-->
+                
+                <lightning:input type="radio"
+                     label="{!v.answer.Name}"
+                     aura:id="RELATED_OPTIONS"
+                     name="RELATED_OPTIONS"
+                     checked="false"
+                     onchange="{! c.onRadio }"            
+                     />
+              <!--</span>-->
+
+
+            </div>
+          </lightning:layoutItem>
+
+          <lightning:layoutItem padding="around-small" flexibility="auto">
+            <div class="custom-box">
+              <lightning:formattedRichText
+                value="{!v.answer.Full_body_answer__c}"
+              />
+                <!--<lightning:formattedText value="{!v.answer.Name}" />-->
+                <!-- <lightning:helptext content="{!'/one/one.app?#/sObject/'+ v.answer.Id + '/view'}"/> -->
+              <a href="{!'/one/one.app?#/sObject/'+ v.answer.Id + '/view'}" target="_blank">link</a>
+            </div>
+          </lightning:layoutItem>
+        </lightning:layout>
+      </div>
+    </aura:set>
+  </aura:if>
+  
+ 
+
+</aura:component>

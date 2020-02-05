@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Tests" icon-name="utility:animal_and_nature">
+        <div class="slds-card__body_inner">
+            <!-- Start test list -->
+            <template if:true={tests.data}>
+                <lightning-input type="search"
+                    onchange={handleSearchTermChange}
+                    variant="label-hidden"
+                    class="slds-m-bottom_small"
+                    label="Search"
+                    placeholder="Search for tests"
+                    value={searchTerm}>
+                </lightning-input>
+                <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                    <template for:each={tests.data} for:item="test">
+                        <lightning-layout-item key={test.Id} size="3" class="slds-p-around_x-small">
+                            <!-- <c-test-tile test={test} ontestview={handletestView}></c-test-tile>-->
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+                <!-- No tests found -->
+                <template if:false={hasResults}>
+                    <div class="slds-align_absolute-center slds-m-vertical_small">
+                        This is testy disturbing, we did not find results...
+                    </div>
+                </template>
+            </template>
+            <!-- End test list -->
+            <!-- Data failed to load -->
+            <template if:true={tests.error}>
+                <div class="slds-text-color_error">
+                    An error occurred while loading the test list
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

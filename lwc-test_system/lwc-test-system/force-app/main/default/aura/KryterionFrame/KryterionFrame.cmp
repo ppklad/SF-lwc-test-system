@@ -1,0 +1,85 @@
+<aura:component
+  implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId"
+  access="global"
+>
+  <aura:attribute
+    name="test_type"
+    type="Test__c"
+    required="true"
+    default="{
+        'sobjectType': 'Test__c',
+        'Name': 'PD1 (S19)',                                               
+        'Topic__c': 'PD1 (S19)' }"
+  />
+  <aura:attribute name="question" type="Question__c" />
+  <aura:attribute name="questionCount" type="Integer" />
+  <aura:attribute name="Test_result" type="Test_result__c" />
+  <aura:attribute name="Answer_results" type="Answer_result__c[]" />
+    
+     
+
+  <aura:registerEvent name="button" type="c:KryterionButtonPressed" />
+
+
+  <!-- Наименование теста начало-->
+  <div class="slds-align_absolute-center" style="height:5rem">
+    <strong> {!v.test_type.Full_name__c} </strong>
+  </div>
+  <!-- Наименование теста конец -->
+
+  
+
+  <!--Блок вопросов и ответов начало -->
+  <div class="slds-form-element">
+      <strong> 
+          <a href="{!'/one/one.app?#/sObject/'+ v.question.Id + '/view'}" target="_blank">{!v.question.Name}</a> of {!v.questionCount} 
+      </strong>
+      <div class="slds-form-element__control">
+      
+            
+      <p>
+        <lightning:formattedRichText value="{!v.question.Question_body__c}"/>
+        <lightning:helptext content="{!v.question.Comments__c}"/>  
+        <!--<a href="{!v.question.Comments__c}" target="_blank">{!v.question.Comments__c}</a>-->
+      </p>
+		
+      
+
+      {!v.question.Answers__r}
+      <!--Блок ответов начало -->
+      <aura:iteration items="{!v.question.Answers__r}" var="answer">
+        <c:KryterionAnswerBlock
+          test_type="{!v.test_type}"
+          question="{!v.question}"
+          Test_result="{!v.Test_result}"
+          answer="{!answer}"
+          Answer_results="{!v.Answer_results}"
+        />
+      </aura:iteration>
+      <!--Блок ответов конец -->
+      
+      <div class="slds-float_right">
+        <p>
+          <lightning:buttonGroup>
+            <aura:if isTrue="{!v.question.Number__c > 1}"> 
+              <lightning:button label="Back" title="Back" onclick="{! c.handleClickBack }" />  
+            </aura:if>
+            <aura:if isTrue="{!lessthan(v.question.Number__c,v.questionCount)}"> 
+              <lightning:button label="Next>" title="Next" onclick="{! c.handleClickNext }" accesskey=" "/>
+            </aura:if>     
+          
+            <lightning:button label="Review All" title="3" onclick="{! c.handleClickNext }" />
+            <lightning:button label="Submit Exam" title="4" onclick="{! c.handleClickNext }" />
+          </lightning:buttonGroup>
+        </p>
+      </div>
+
+    </div>
+  </div>
+  <!--Блок вопросов и ответов конец -->
+  <div class="slds-p-top_xx-large">
+    <lightning:progressBar value="{!mult(div(v.question.Number__c,v.questionCount),100)}" size="small" />
+    <!-- <div class="slds-progress-bar slds-progress-bar_x-small" aria-valuemin="1" aria-valuemax="{!v.questionCount}" aria-valuenow="{!v.question.Number__c}" role="progressbar"></div> -->
+  </div>
+  
+</aura:component>

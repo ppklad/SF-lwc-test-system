@@ -1,0 +1,48 @@
+<template>
+    <!-- пока не прогрузился -->
+    <template if:false={data}>
+        надо бы центрировать относительно блока
+        <div class="demo-only" style="height:6rem">
+            <div class="slds-spinner_container">
+              <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+              </div>
+            </div>
+          </div>
+    </template>
+    <!-- основная часть -->
+    <template if:true={data}>   
+        <div class="slds-card slds-card_boundary">
+            <div class="slds-text-align_right slds-text-heading_medium">{test.Name}</div>
+            <lightning-progress-bar variant="circular" value={progress} size="small"></lightning-progress-bar>
+                <!-- <template for:each={data} for:item="question" > -->
+                    <lightning-layout-item key={question.Id} size="3" >
+                        <c-question-tile question={question}></c-question-tile>
+                    </lightning-layout-item>
+                <!-- </template>  -->
+        </div>
+
+        <!-- блок кнопок начало -->
+        <div class="slds-theme_shade slds-border_top">
+            <div class="slds-p-around_small slds-align_absolute-center">
+                <lightning-button-group class="slds-button-group-row">
+                    <div class="slds-button-group-item">
+                        <lightning-button class="slds-theme_neutral" icon-position="left" variant="neutral" type="button" label="Previous" icon-name="utility:back" onclick={handleButtonPreviousClick}>></lightning-button>
+                    </div>
+                    <div class="slds-button-group-item">
+                        <lightning-button class="slds-theme_neutral" icon-position="right" variant="neutral" type="button" label="Next" icon-name="utility:forward" onclick={handleButtonNextClick}></lightning-button>
+                    </div>
+                    <div class="slds-button-group-item">
+                        <lightning-button class="slds-theme_brand" icon-position="left" variant="brand" type="button" label="Finish" icon-name="action:goal"></lightning-button>
+                    </div>
+                </lightning-button-group>
+            </div>
+        </div> 
+        <!-- блок кнопок конец -->
+    </template>
+
+
+
+</template>
