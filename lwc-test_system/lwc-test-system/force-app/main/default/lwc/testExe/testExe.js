@@ -55,7 +55,7 @@ export default class TestExe extends LightningElement {
             this.navigationHelper();
             // this.question = data[this.questionIndex];
             // eslint-disable-next-line no-console
-            // console.log("ok:"+JSON.stringify(data) );
+             console.log("ok:"+JSON.stringify(data) );
         } else if (error) {
             this.error = error;
             this.data = undefined;
@@ -77,7 +77,7 @@ export default class TestExe extends LightningElement {
     navigationHelper(){
         this.question = this.data[this.questionIndex];
         // eslint-disable-next-line no-console
-        console.log("progress :" + JSON.stringify((this.questionIndex+1) / this.data.length * 100) );
+        console.log("Answers__r :" + JSON.stringify(this.question.Answers__r));
         this.progress = JSON.stringify((this.questionIndex+1) / this.data.length * 100);
 
     }

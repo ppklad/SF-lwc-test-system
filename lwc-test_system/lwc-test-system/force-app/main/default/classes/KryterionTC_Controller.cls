@@ -3,7 +3,22 @@ public class KryterionTC_Controller {
     @AuraEnabled(cacheable=true)
     public static List<Question__c> getQuestions(String testId){
       system.debug('>>>'+testId);
-      List<Question__c> lstQ = [SELECT Id, Number__c, Name, Answer_option__c, Question_body__c,Comments__c, (Select ID,Name,Is__c,Full_body_answer__c FROM Answers__r ORDER BY Name) FROM Question__c WHERE Test__c=:testId ORDER BY Number__c];
+      List<Question__c> lstQ = [
+        SELECT Id, 
+          Number__c, 
+          Name, 
+          Answer_option__c, 
+          Question_body__c,
+          Comments__c, 
+            (Select 
+              ID,Name,
+              Is__c
+               ,Full_body_answer__c 
+              FROM Answers__r 
+            ORDER BY Name) 
+        FROM Question__c 
+        WHERE Test__c=:testId 
+        ORDER BY Number__c];
         
       return lstQ;
     }
