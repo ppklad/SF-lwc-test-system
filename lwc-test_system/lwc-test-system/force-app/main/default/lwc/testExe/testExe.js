@@ -4,10 +4,10 @@ import getTestObj from '@salesforce/apex/KryterionTC_Controller.getTestObj';
 import getTestId from '@salesforce/apex/KryterionTC_Controller.getTestId';
 
 export default class TestExe extends LightningElement {
-
-    // @track data;
     @track error;
-    @track test;
+    test;
+    testr;
+    @track showrightanswer;
     @track data;
     @track question;
     @track progress;
@@ -19,7 +19,8 @@ export default class TestExe extends LightningElement {
     @wire(getTestId, {testId: '$recordId'})
     wiredTestId({ error, data }){
         if (data) {
-            this.testId = data;
+            this.testId = data.Test__c;
+            this.testr = data;
             this.error = undefined;
             // eslint-disable-next-line no-console
             // console.log("ok:"+JSON.stringify(data) );
@@ -55,7 +56,7 @@ export default class TestExe extends LightningElement {
             this.navigationHelper();
             // this.question = data[this.questionIndex];
             // eslint-disable-next-line no-console
-             console.log("ok:"+JSON.stringify(data) );
+            //  console.log("ok:"+JSON.stringify(data) );
         } else if (error) {
             this.error = error;
             this.data = undefined;
@@ -64,21 +65,33 @@ export default class TestExe extends LightningElement {
         }
     }
 
+
+    //
+    //Buttons
+    //
     handleButtonNextClick(){
         this.questionIndex++;
         this.navigationHelper();
-        // this.question = this.data[this.questionIndex];
     }
     handleButtonPreviousClick(){
         this.questionIndex--;
         this.navigationHelper();
     }
-
+    handleCheckClick(){
+        this.showrightanswer = true;
+    }
+    
+    
+    
+    //
+    //Helpers
+    //    
     navigationHelper(){
+        this.showrightanswer = false;
         this.question = this.data[this.questionIndex];
         // eslint-disable-next-line no-console
-        console.log("Answers__r :" + JSON.stringify(this.question.Answers__r));
-        this.progress = JSON.stringify((this.questionIndex+1) / this.data.length * 100);
+        // console.log("Answers__r :" + JSON.stringify(this.question.Answers__r));
+        //this.progress = JSON.stringify((this.questionIndex+1) / this.data.length * 100);
 
     }
 }

@@ -1,16 +1,29 @@
 <template>
-    <!-- форма вопроса без ответа -->
-    <template if:false={answerChoosen}>
         <div class="slds-box slds-media slds-media_center" onclick={handleAnswerClick}>
             <div class="slds-media__figure">
                 <div class="slds-theme_default">
-                    <div class="slds-progress-ring slds-progress-ring_large    ">
-                        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="slds-progress-ring__progress" role="progressbar"><svg viewBox="-1 -1 2 2"><path class="slds-progress-ring__path" id="slds-progress-ring-path-2" d="M 1 0 A 1 1 0 0 0 1 0 L 0 0"></path></svg></div>
+                    <div class={progress_ring_class}>
+                        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="slds-progress-ring__progress" role="progressbar">
+                            <svg viewBox="-1 -1 2 2">
+                                <path class="slds-progress-ring__path" id="slds-progress-ring-path-2" d="M 1 0 A 1 1 0 0 0 1 0 L 0 0"></path>
+                            </svg></div>
                         <div class="slds-progress-ring__content">
                             <div dropzone="progressRingSLDS body">
-                                <div class="canvas-element" >
-                                    <div class="slds-text-title slds-text-color_default">{answer.Name}</div>
-                                </div>
+                                <template if:false={answerChoosen}>
+                                    <div class="canvas-element" >
+                                        <div class="slds-text-title slds-text-color_default">{answer.Name}</div>
+                                    </div>
+                                </template>
+                                <template if:true={answerChoosen}>
+                                    <div class="canvas-element--inline">
+                                        <div class="canvas-element" >
+                                            <span class="slds-icon_container slds-icon-utility-check " title="">
+                                                <lightning-icon icon-name="utility:check" alternative-text="Checked" variant="check"></lightning-icon>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </template>
+
                             </div>
                         </div>
                     </div>
@@ -21,38 +34,4 @@
             </div>
             <div class="slds-media__figure slds-media__figure_reverse"></div>
         </div>
-    
-    <!-- формы вопросов с ответом     -->
-    </template>
-    <template if:true={answerChoosen}>
-        <!-- если выбран вариант ответа -->
-        <template if:true={answerIsRight}>
-            <!-- если выбран правильный -->
-            <div class="slds-box  slds-media slds-media_center" onclick={handleAnswerClick}>
-                <div class="slds-media__figure">
-                    <div class="slds-progress-ring slds-progress-ring_large    slds-progress-ring_complete">
-                        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="slds-progress-ring__progress" role="progressbar"><svg viewBox="-1 -1 2 2"><path class="slds-progress-ring__path" id="slds-progress-ring-path-1" d="M 1 0 A 1 1 0 0 0 1 0 L 0 0"></path></svg></div>
-                        <div class="slds-progress-ring__content">
-                            <div dropzone="progressRingSLDS body">
-                                <div class="canvas-element--inline">
-                                    <div class="canvas-element" >
-                                        <span class="slds-icon_container slds-icon-utility-check " title="">
-                                            <lightning-icon icon-name="utility:check" alternative-text="Checked" variant="check"></lightning-icon>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-                <div class="slds-media__body">
-                    <div class="slds-m-bottom_small slds-text-align_left slds-text-title slds-text-color_default">{answer.Full_body_answer__c}</div>
-                </div>
-                <div class="slds-media__figure slds-media__figure_reverse"></div>
-            </div>
-        </template>
-        <template if:false={answerIsRight}>
-            не угадал
-        </template>
-    </template>
 </template>

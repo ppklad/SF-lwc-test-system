@@ -85,11 +85,33 @@ public class KryterionTC_Controller {
     }
     
     @AuraEnabled(cacheable=true)
-    public static String getTestId(String testId){
+    public static Test_result__c getTestId(String testId){
       System.debug('>>>'+testId); 
-      Test_result__c t = [SELECT Id, Test__c  FROM Test_result__c WHERE Id = :testId ];
+      Test_result__c t = [
+        SELECT 
+          Id,
+          Date__c,
+          Elapsed_time__c,
+          Status__c,
+          Test__c,
+          Name,
+          ( SELECT 
+              Id
+              ,Name
+              ,Question__c
+              ,Selected_answer__c 
+            FROM 
+              Answer_results__r 
+            ORDER BY 
+              Name 
+          )   
+        FROM 
+          Test_result__c
+        WHERE 
+          Id = :testId
+              ];
       System.debug('>>>'+t.Test__c);  
-      return t.Test__c;
+      return t;
     }
 
 
