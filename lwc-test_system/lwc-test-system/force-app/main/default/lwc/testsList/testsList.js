@@ -9,11 +9,24 @@ export default class TestListNav extends NavigationMixin(LightningElement) {
 	@wire(searchTests, {searchTerm: '$searchTerm'})
 	tests;
 	
-	
 	connectedCallback() {
-		// eslint-disable-next-line no-console
-		// console.log("@wire:"+JSON.stringify(this.tests));
 		loadStyle(this, ursusResources + '/style.css');
+		window.clearTimeout(this.delayTimeout);
+		// eslint-disable-next-line @lwc/lwc/no-async-operation
+		this.delayTimeout = setTimeout(() => {
+					// eslint-disable-next-line no-console
+					this.tests.data = [
+						{Id:'a003X00001403WjQAI',Name:'ADM(201) SU19', Topic__c:'Administrator'},
+						{Id:'a003X0000140hjZQAQ',Name:'App Builder (SP19)',Full_name__c:'App Builder (SP19)',Topic__c:'Developer'},
+						{Id:'a003X00001401z1QAA',Name:'PD1 (SU19)',Full_name__c:'Salesforce Certified Platform Developer I (SP19)',Topic__c:'Developer'},
+						{Id:'a003X00001406ecQAA',Name:'PD1 (WI18)',Full_name__c:'Summer 18 and Winter 19 PD1',Topic__c:'Administrator'},
+						{Id:'a003X0000140DDkQAM',Name:'PD2 (SU19) v1',Full_name__c:'Salesforce Certified Platform Developer II - Multiple Choice (SU19)',Topic__c:'Developer'},
+						{Id:'a003X0000140MPrQAM',Name:'PD2 (SU19) v2',Full_name__c:'Salesforce Certified Platform Developer II - Multiple Choice (SU19)(v2)',Topic__c:'Developer'},
+						{Id:'a003X0000140iw7QAA',Name:'Sharing and Visibility',Full_name__c:'Salesforce Certified Sharing and Visibility Designer',Topic__c:'Developer'},
+						{Id:'a003X0000142XNWQA2',Name:'tt',Full_name__c:'ttt',Topic__c:'Administrator'}];
+		}, 100);
+
+
 	}
 	handleSearchTermChange(event) {
 		// Debouncing this method: do not update the reactive property as

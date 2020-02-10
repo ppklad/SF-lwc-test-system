@@ -1,3 +1,10 @@
+.test-silhouette {
+    height: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .test-tile:hover .slds-card {
     border: 1px solid #9b724b;
     background-color: #f5ebe1;
