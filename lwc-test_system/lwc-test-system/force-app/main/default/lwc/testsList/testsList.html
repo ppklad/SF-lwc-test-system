@@ -1,5 +1,5 @@
 <template>
-    <lightning-card title="Tests" icon-name="utility:animal_and_nature">
+    <lightning-card title="Tests" icon-name="utility:list">
         <div class="slds-card__body_inner">
             <!-- Start test list -->
             <template if:true={tests.data}>
@@ -11,13 +11,22 @@
                     placeholder="Search for tests"
                     value={searchTerm}>
                 </lightning-input>
-                <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                <lightning-layout multiple-rows="true" pull-to-boundary="small" class="slds-hide_x-small">
                     <template for:each={tests.data} for:item="test">
                         <lightning-layout-item key={test.Id} size="3" class="slds-p-around_x-small">
-                            <!-- <c-test-tile test={test} ontestview={handletestView}></c-test-tile>-->
+                            <c-test-tile test={test} ontestview={handleTestView}></c-test-tile>
                         </lightning-layout-item>
                     </template>
                 </lightning-layout>
+                <lightning-layout multiple-rows="true" pull-to-boundary="small" class="slds-show_x-small">
+                    <template for:each={tests.data} for:item="test">
+                        <lightning-layout-item key={test.Id} size="1" class="slds-p-around_x-small">
+                            <!-- <c-test-tile test={test} ontestview={handleTestView}></c-test-tile> -->
+                            <p>{test.Full_name__c}</p>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+
                 <!-- No tests found -->
                 <template if:false={hasResults}>
                     <div class="slds-align_absolute-center slds-m-vertical_small">

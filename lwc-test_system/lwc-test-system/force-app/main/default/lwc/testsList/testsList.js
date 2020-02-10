@@ -1,24 +1,18 @@
-import { NavigationMixin, CurrentPageReference } from 'lightning/navigation';
-import { fireEvent } from 'c/pubsub';
+import { NavigationMixin } from 'lightning/navigation';
 import { loadStyle } from 'lightning/platformResourceLoader';
-import ursusResources from '@salesforce/resourceUrl/ursus_park';
+import ursusResources from '@salesforce/resourceUrl/lwc_test';
 import { LightningElement, track, wire } from 'lwc';
 /** TestController.searchTests(searchTerm) Apex method */
 import searchTests from '@salesforce/apex/TestController.searchTests';
 export default class TestListNav extends NavigationMixin(LightningElement) {
 	@track searchTerm = '';
-    
-    @track tests;
-    @wire(CurrentPageReference) pageRef;
-    @wire(searchTests, {searchTerm: '$searchTerm'})
-    loadTests(result) {
-        this.tests = result;
-        if (result.data) {
-            fireEvent(this.pageRef, 'testListUpdate', result.data);
-        }
-    }
-
+	@wire(searchTests, {searchTerm: '$searchTerm'})
+	tests;
+	
+	
 	connectedCallback() {
+		// eslint-disable-next-line no-console
+		// console.log("@wire:"+JSON.stringify(this.tests));
 		loadStyle(this, ursusResources + '/style.css');
 	}
 	handleSearchTermChange(event) {

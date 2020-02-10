@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Test" icon-name="utility:list">
+        <c-chart-bar percentage="50" indicator="total rate">
+        </c-chart-bar>
+        <lightning-button-icon
+				icon-name="action:goal"
+				icon-class="test-tile-button"
+				variant="bare"
+				alternative-text="Start new test"
+				onclick={handleStartTestClick}>
+			</lightning-button-icon>
+    </lightning-card> 
+</template>

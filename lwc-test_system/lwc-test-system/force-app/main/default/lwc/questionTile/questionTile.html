@@ -1,6 +1,5 @@
 <template>
     <div class="slds-p-around_small">
-        
         <div class="slds-m-bottom_x-small slds-text-heading_medium" >{question.Name}</div>
         <div class="slds-m-bottom_small slds-text-align_left slds-text-title slds-text-color_default slds-text-heading_large">
             <h2><strong>{question.Question_body__c}</strong></h2>
@@ -8,9 +7,7 @@
         <ul class="slds-m-top_small slds-list_vertical-space-medium">
             <template for:each={question.Answers__r} for:item="answer" >
                 <li class="slds-item" key={answer.Id}>
-                    <!-- <div class="slds-box"> -->
-                        <c-answer-row answer={answer} showrightanswer={showrightanswer} testr={testr} question={question}></c-answer-row>
-                    <!-- </div> -->
+                    <c-answer-row answer={answer} showrightanswer={showrightanswer} testr={testr} question={question} onclick={handleClick} ></c-answer-row>
                 </li>
             </template>
         </ul>
