@@ -113,6 +113,11 @@ public class KryterionTC_Controller {
       System.debug('>>>'+t.Test__c);  
       return t;
     }
-
-
+    
+    // @AuraEnabled
+    // public static List<Test_result__c> upsertTestAnswers(List<Test_result__c> testa) {
+    //   System.debug('con => '+testa);
+    //   upsert testa;
+    //   return testa;
+    // }
 }

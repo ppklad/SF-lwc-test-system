@@ -1,16 +1,25 @@
 import { NavigationMixin } from 'lightning/navigation';
-import { loadStyle } from 'lightning/platformResourceLoader';
-import ursusResources from '@salesforce/resourceUrl/lwc_test';
 import { LightningElement, track, wire } from 'lwc';
-/** TestController.searchTests(searchTerm) Apex method */
 import searchTests from '@salesforce/apex/TestController.searchTests';
+import { createRecord } from 'lightning/uiRecordApi';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import TESTR_OBJECT from '@salesforce/schema/Test_result__c';
+import NAME_FIELD from '@salesforce/schema/Test_result__c.Name';
+import TEST_FIELD from '@salesforce/schema/Test_result__c.Test__c';
+import STATUS_FIELD from '@salesforce/schema/Test_result__c.Status__c';
+import DATE_FIELD from '@salesforce/schema/Test_result__c.Date__c';
+
+
+
+
 export default class TestListNav extends NavigationMixin(LightningElement) {
 	@track searchTerm = '';
+	@track testrId;
 	@wire(searchTests, {searchTerm: '$searchTerm'})
 	tests;
 	
 	connectedCallback() {
-		loadStyle(this, ursusResources + '/style.css');
+		// loadStyle(this, ursusResources + '/style.css');
 		window.clearTimeout(this.delayTimeout);
 		// eslint-disable-next-line @lwc/lwc/no-async-operation
 		this.delayTimeout = setTimeout(() => {
@@ -55,4 +64,47 @@ export default class TestListNav extends NavigationMixin(LightningElement) {
 			},
 		});
 	}
+
+	handleTestIsChoosen(event){
+		
+
+		const fields = {};
+		fields[NAME_FIELD.fieldApiName] = event.detail.testName = toString( new Date().toISOString() );
+		fields[TEST_FIELD.fieldApiName] = event.detail.testId;
+		fields[STATUS_FIELD.fieldApiName] = "Started";
+		fields[DATE_FIELD.fieldApiName] =  new Date().toISOString();
+
+		// eslint-disable-next-line no-console
+		console.log(">>> fields:"+JSON.stringify( new Date().toISOString()) );
+
+		const recordInput = { apiName: TESTR_OBJECT.objectApiName, fields };
+		try {
+			createRecord(recordInput)
+				.then(testr => {
+					this.testrId = testr.id;
+					// eslint-disable-next-line no-console
+					console.log(">>>testrId"+this.testrId);
+					this.dispatchEvent(
+						new ShowToastEvent({
+							title: 'Success',
+							message: 'Test started',
+							variant: 'success',
+						}),
+					);
+				})
+				.catch(error => {
+					this.dispatchEvent(
+						new ShowToastEvent({
+							title: 'Error creating test res record',
+							message: error.body.message,
+							variant: 'error',
+						}),
+					);
+				});
+		} catch (error) {
+			// eslint-disable-next-line no-console
+			console.log("err "+error)
+		}
+	}
+	
 }
