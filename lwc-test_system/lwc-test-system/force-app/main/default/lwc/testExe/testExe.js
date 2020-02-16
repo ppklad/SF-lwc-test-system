@@ -2,6 +2,10 @@ import { LightningElement, track, wire, api } from 'lwc';
 import getQuestions from '@salesforce/apex/KryterionTC_Controller.getQuestions';
 import getTestObj from '@salesforce/apex/KryterionTC_Controller.getTestObj';
 import getTestId from '@salesforce/apex/KryterionTC_Controller.getTestId';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+// import upsertTestr from '@salesforce/apex/KryterionTC_Controller.upsertTestAnswers';
+// import TESTA_OBJECT from '@salesforce/schema/Test_result__c';
+import { updateRecord } from 'lightning/uiRecordApi';
 
 export default class TestExe extends LightningElement {
     @api recordId;
@@ -99,6 +103,11 @@ export default class TestExe extends LightningElement {
     handleCheckClick(){
         this.showrightanswer = !this.showrightanswer ;
     }
+    handleButtonFinishClick(){
+        // eslint-disable-next-line no-console
+        console.log(">>> fin:"+JSON.stringify(this.testr.Answer_results__r));
+    }
+
     
     
     
@@ -132,6 +141,7 @@ export default class TestExe extends LightningElement {
             };
            
             this.testr.Answer_results__r.push(newanswerresult);
+            // this.upsertAnswerRes(newanswerresult);
 
             //обьет question передается в дочерний компонент, поэтому дописываем туда что ответ выбран, для корректного
             //отображения галочки при переходе между вопросами
@@ -184,6 +194,29 @@ export default class TestExe extends LightningElement {
         }
 
         return arr;
+    }
+
+    upsertAnswerRes(a){
+        updateRecord(a)
+        // eslint-disable-next-line no-unused-vars
+        .then(() => {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Success',
+                    message: 'Record Is Updated',
+                    variant: 'sucess',
+                }),
+            );
+        })
+        .catch(error => {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Error on data save',
+                    message: error.message.body,
+                    variant: 'error',
+                }),
+            );
+        });
     }
 
 }

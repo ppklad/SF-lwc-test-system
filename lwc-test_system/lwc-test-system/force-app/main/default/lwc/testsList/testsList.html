@@ -1,46 +1,54 @@
 <template>
-    <lightning-card title="Tests" icon-name="utility:list">
-        <div class="slds-card__body_inner">
-            <!-- Start test list -->
-            <template if:true={tests.data}>
-                <lightning-input type="search"
-                    onchange={handleSearchTermChange}
-                    variant="label-hidden"
-                    class="slds-m-bottom_small"
-                    label="Search"
-                    placeholder="Search for tests"
-                    value={searchTerm}>
-                </lightning-input>
-                <lightning-layout multiple-rows="true" pull-to-boundary="small" class="slds-hide_x-small">
-                    <template for:each={tests.data} for:item="test">
-                        <lightning-layout-item key={test.Id} size="3" class="slds-p-around_x-small">
-                            <c-test-tile test={test} ontestview={handleTestView}></c-test-tile>
-                        </lightning-layout-item>
-                    </template>
-                </lightning-layout>
-                <lightning-layout multiple-rows="true" pull-to-boundary="small" class="slds-show_x-small">
-                    <template for:each={tests.data} for:item="test">
-                        <lightning-layout-item key={test.Id} size="1" class="slds-p-around_x-small">
-                            <!-- <c-test-tile test={test} ontestview={handleTestView}></c-test-tile> -->
-                            <p>{test.Full_name__c}</p>
-                        </lightning-layout-item>
-                    </template>
-                </lightning-layout>
+	
+    <template if:false={testrId}>
+        <lightning-card title="Tests" icon-name="utility:list">
+            <div class="slds-card__body_inner">
+                <!-- Start test list -->
+                <template if:true={tests.data}>
+                    <lightning-input type="search"
+                        onchange={handleSearchTermChange}
+                        variant="label-hidden"
+                        class="slds-m-bottom_small"
+                        label="Search"
+                        placeholder="Search for tests"
+                        value={searchTerm}>
+                    </lightning-input>
 
-                <!-- No tests found -->
-                <template if:false={hasResults}>
-                    <div class="slds-align_absolute-center slds-m-vertical_small">
-                        This is testy disturbing, we did not find results...
+                    <lightning-layout multiple-rows="true" pull-to-boundary="small" class="slds-hide_x-small">
+                        <template for:each={tests.data} for:item="test">
+                            <!-- <lightning-layout-item key={test.Id} size="1" class="slds-p-around_x-small" > -->
+                                <p key={test.Id}>{test.Full_name__c}</p>
+                            <!-- </lightning-layout-item> -->
+                        </template>
+                    </lightning-layout>
+                    
+                    <lightning-layout multiple-rows="true" pull-to-boundary="small" class="slds-show_x-small">
+                        <template for:each={tests.data} for:item="test">
+                            <lightning-layout-item key={test.Id} size="3" class="slds-p-around_x-small" >
+                                <c-test-tile test={test} ontestview={handleTestView} ontestischoosen={handleTestIsChoosen}></c-test-tile>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+
+                    <!-- No tests found -->
+                    <template if:false={hasResults}>
+                        <div class="slds-align_absolute-center slds-m-vertical_small">
+                            This is testy disturbing, we did not find results...
+                        </div>
+                    </template>
+                </template>
+                <!-- End test list -->
+                <!-- Data failed to load -->
+                <template if:true={tests.error}>
+                    <div class="slds-text-color_error">
+                        An error occurred while loading the test list
                     </div>
                 </template>
-            </template>
-            <!-- End test list -->
-            <!-- Data failed to load -->
-            <template if:true={tests.error}>
-                <div class="slds-text-color_error">
-                    An error occurred while loading the test list
-                </div>
-            </template>
-        </div>
-    </lightning-card>
+            </div>
+        </lightning-card>
+    
+    </template>
+    <template if:true={testrId}>
+		<c-test-exe record-id={testrId}></c-test-exe>
+	</template>
 </template>
