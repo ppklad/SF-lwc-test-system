@@ -15,7 +15,8 @@
                 <lightning-layout multiple-rows="true" pull-to-boundary="small" class="slds-hide_x-small">
                     <template for:each={tests.data} for:item="test">
                         <lightning-layout-item key={test.Id} size="3" class="slds-p-around_x-small">
-                            <c-test-tile test={test} ontestview={handleTestView}></c-test-tile>
+                            
+                            <p>{test.Name}</p>
                         </lightning-layout-item>
                     </template>
                 </lightning-layout>
@@ -23,8 +24,7 @@
                 <lightning-layout multiple-rows="true" pull-to-boundary="small" class="slds-show_x-small">
                     <template for:each={tests.data} for:item="test">
                         <lightning-layout-item key={test.Id} size="1" class="slds-p-around_x-small">
-                            <!-- <c-test-tile test={test} ontestview={handleTestView}></c-test-tile> -->
-                            <p>{test.Name}</p>
+                            <c-test-tile test={test} ontestview={handleTestView}></c-test-tile>
                         </lightning-layout-item>
                     </template>
                 </lightning-layout>
