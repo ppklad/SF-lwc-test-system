@@ -69,7 +69,7 @@ export default class TestListNav extends NavigationMixin(LightningElement) {
 		
 
 		const fields = {};
-		fields[NAME_FIELD.fieldApiName] = event.detail.testName = toString( new Date().toISOString() );
+		fields[NAME_FIELD.fieldApiName] = event.detail.testName + toString( new Date().toISOString() );
 		fields[TEST_FIELD.fieldApiName] = event.detail.testId;
 		fields[STATUS_FIELD.fieldApiName] = "Started";
 		fields[DATE_FIELD.fieldApiName] =  new Date().toISOString();

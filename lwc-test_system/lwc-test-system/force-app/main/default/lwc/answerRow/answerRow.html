@@ -2,10 +2,39 @@
         <div class="slds-box slds-media slds-media_center" onclick={handleAnswerClick}>
             <div class="slds-media__figure">
                 <div class="slds-theme_default">
+                    
+                    <template if:false={showrightanswer}>
+                        <template if:false={answerChoosen}>
+                            <div class="slds-progress-ring slds-progress-ring_large">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="slds-progress-ring__progress" role="progressbar">
+                                    <svg viewBox="-1 -1 2 2">
+                                        <path class="slds-progress-ring__path" id="slds-progress-ring-path-2" d="M 1 0 A 1 1 0 0 0 1 0 L 0 0"></path>
+                                    </svg>
+                                </div>
+                                <div class="slds-progress-ring__content">
+                                    <div dropzone="progressRingSLDS body">
+                                        <div class="canvas-element" >
+                                            <div class="slds-text-title slds-text-color_default">{answer.Name}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={answerChoosen}>
+                            <c-showcheckanswer></c-showcheckanswer> 
+                        </template>
+                    </template>
+                    <template if:true={showrightanswer}>
+                        <template if:true={answerIsRight}>
+                            <c-showrightanswer></c-showrightanswer>
+                        </template>
+                        <template if:false={answerIsRight}>
+                            <c-showwronganswer></c-showwronganswer>
+                        </template>
+                    </template>
 
-                    <template if:false={answerChoosen}>
+                    <!-- <template if:false={answerChoosen}>
                         <template if:false={showrightanswer}>
-
                             <div class="slds-progress-ring slds-progress-ring_large">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="slds-progress-ring__progress" role="progressbar">
                                     <svg viewBox="-1 -1 2 2">
@@ -24,24 +53,7 @@
                         </template>
                         <template if:true={showrightanswer}>
                             <template if:true={answerIsRight}>
-                                <c-shoerightanswer></c-shoerightanswer>
-                                <!-- <div class="slds-progress-ring slds-progress-ring_large slds-progress-ring_complete">
-                                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="slds-progress-ring__progress" role="progressbar">
-                                        <svg viewBox="-1 -1 2 2">
-                                            <path class="slds-progress-ring__path" id="slds-progress-ring-path-4" d="M 1 0 A 1 1 0 0 0 1 0 L 0 0"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="slds-progress-ring__content">
-                                        <div dropzone="progressRingSLDS body">
-                                            <div class="canvas-element" >
-                                                <span class="slds-icon_container slds-icon-utility-check " title="">
-                                                    <lightning-icon icon-name="utility:check" alternative-text="Checked" variant="check"></lightning-icon>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
+                                <c-showrightanswer></c-showrightanswer>
                             </template>
 
                             <template if:false={answerIsRight}>
@@ -54,44 +66,11 @@
                     <template if:true={answerChoosen}>
                         <template if:false={showrightanswer}>
                             <c-showcheckanswer></c-showcheckanswer> 
-                            <!-- <div class="slds-progress-ring slds-progress-ring_large">
-                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="slds-progress-ring__progress" role="progressbar">
-                                    <svg viewBox="-1 -1 2 2">
-                                        <path class="slds-progress-ring__path" id="slds-progress-ring-path-3" d="M 1 0 A 1 1 0 0 0 1 0 L 0 0"></path>
-                                    </svg>
-                                </div>
-                                <div class="slds-progress-ring__content">
-                                    <div dropzone="progressRingSLDS body">
-                                        <div class="canvas-element" >
-                                            <span class="slds-icon_container slds-icon-utility-check " title="">
-                                                <lightning-icon icon-name="utility:check" alternative-text="Checked" variant="check"></lightning-icon>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
                         </template>
 
                         <template if:true={showrightanswer}>
                             <template if:true={answerIsRight}>
-                                <c-showcheckanswer></c-showcheckanswer>
-                                <!-- <div class="slds-progress-ring slds-progress-ring_large slds-progress-ring_complete">
-                                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="slds-progress-ring__progress" role="progressbar">
-                                        <svg viewBox="-1 -1 2 2">
-                                            <path class="slds-progress-ring__path" id="slds-progress-ring-path-7" d="M 1 0 A 1 1 0 0 0 1 0 L 0 0"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="slds-progress-ring__content">
-                                        <div dropzone="progressRingSLDS body">
-                                            <div class="canvas-element" >
-                                                <span class="slds-icon_container slds-icon-utility-check " title="">
-                                                    <lightning-icon icon-name="utility:check" alternative-text="Checked" variant="check"></lightning-icon>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
+                                <c-showrightanswer></c-showrightanswer>
                             </template>
 
                             <template if:false={answerIsRight}>
@@ -99,7 +78,7 @@
                             </template>
                         </template>
 
-                    </template>
+                    </template> -->
 
                 </div>
             </div>
