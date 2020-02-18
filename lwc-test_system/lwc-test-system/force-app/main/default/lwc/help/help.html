@@ -1,5 +1,19 @@
 <template>
-    <div class="slds-p-around_medium lgc-bg">
+    <!-- <div class="slds-p-around_medium lgc-bg">
         <lightning-helptext icon-name="utility:help" content={comments}></lightning-helptext>
+    </div> -->
+
+    <div class="slds-p-around_medium lgc-bg">
+        <lightning-button-menu alternative-text="Show menu">
+            <lightning-menu-item value="MenuItemOne" label={comments}></lightning-menu-item>
+
+        </lightning-button-menu>
     </div>
+
+    <!-- <lightning-accordion class="example-accordion">
+        <lightning-accordion-section name="A" label="Accordion Title A">
+            <p><lightning-formatted-text value={comments} linkify></lightning-formatted-text></p>
+        </lightning-accordion-section>
+
+    </lightning-accordion> -->
 </template>

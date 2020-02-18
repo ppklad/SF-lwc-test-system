@@ -8,7 +8,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { updateRecord } from 'lightning/uiRecordApi';
 
 export default class TestExe extends LightningElement {
-    @api recordId;
+    @api recordid;
     
     @track error;   
     @track showrightanswer=false;
@@ -22,7 +22,7 @@ export default class TestExe extends LightningElement {
     localmode = true;
     // progress_ring_class = "slds-progress-ring slds-progress-ring_large";
 
-    @wire(getTestId, {testId: '$recordId'})
+    @wire(getTestId, {testId: '$recordid'})
     wiredTestId({ error, data }){
         if (data) {
             this.testId = data.Test__c;
