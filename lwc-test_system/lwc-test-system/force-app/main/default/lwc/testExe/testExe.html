@@ -53,21 +53,26 @@
         
             <!-- блок кнопок начало -->
             <div class="slds-docked-form-footer">
-                <div class="slds-p-around_small slds-align_absolute-center">
-                    <lightning-button-group class="slds-button-group-row">
-                        <div class="slds-button-group-item">
-                            <lightning-button class="slds-theme_neutral" icon-position="left" variant="neutral" type="button" label="" icon-name="utility:back" onclick={handleButtonPreviousClick}>></lightning-button>
-                        </div>
-                        <div class="slds-button-group-item">
-                            <lightning-button class="slds-theme_neutral" icon-position="left" variant="neutral" type="button" label="" icon-name="utility:check" onclick={handleCheckClick}>></lightning-button>
-                        </div>
-                        <div class="slds-button-group-item">
-                            <lightning-button class="slds-theme_neutral" icon-position="right" variant="neutral" type="button" label="" icon-name="utility:forward" onclick={handleButtonNextClick}></lightning-button>
-                        </div>
-                        <div class="slds-button-group-item">
-                            <lightning-button class="slds-theme_brand" icon-position="left" variant="brand" type="button" label="" icon-name="action:goal"  onclick={handleButtonFinishClick}></lightning-button>
-                        </div>
-                    </lightning-button-group>
+                <div>
+                    <lightning-slider label="#" value={questionIndex} size="large" max={data.length} variant="label-hidden" onchange={handleSliderChange}></lightning-slider>
+                
+                    <div class="slds-p-around_small slds-align_absolute-center">
+
+                        <lightning-button-group class="slds-button-group-row">
+                            <div class="slds-button-group-item">
+                                <lightning-button class="slds-theme_neutral" icon-position="left" variant="neutral" type="button" label="" icon-name="utility:back" onclick={handleButtonPreviousClick}>></lightning-button>
+                            </div>
+                            <div class="slds-button-group-item">
+                                <lightning-button class="slds-theme_neutral" icon-position="left" variant="neutral" type="button" label="" icon-name="utility:check" onclick={handleCheckClick}>></lightning-button>
+                            </div>
+                            <div class="slds-button-group-item">
+                                <lightning-button class="slds-theme_neutral" icon-position="right" variant="neutral" type="button" label="" icon-name="utility:forward" onclick={handleButtonNextClick}></lightning-button>
+                            </div>
+                            <div class="slds-button-group-item">
+                                <lightning-button class="slds-theme_brand" icon-position="left" variant="brand" type="button" label="" icon-name="action:goal"  onclick={handleButtonFinishClick}></lightning-button>
+                            </div>
+                        </lightning-button-group>
+                    </div>
                 </div>
             </div> 
         <!-- блок кнопок конец -->

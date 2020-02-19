@@ -107,7 +107,10 @@ export default class TestExe extends LightningElement {
         // eslint-disable-next-line no-console
         console.log(">>> fin:"+JSON.stringify(this.testr.Answer_results__r));
     }
-
+    handleSliderChange(event){
+        this.questionIndex = event.target.value;
+        this.navigationHelper();
+    }
     
     
     
