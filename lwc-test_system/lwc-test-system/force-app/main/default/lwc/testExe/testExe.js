@@ -19,6 +19,7 @@ export default class TestExe extends LightningElement {
     progress;
     test;
     testr;
+    maxindex = 0;
     localmode = true;
     // progress_ring_class = "slds-progress-ring slds-progress-ring_large";
 
@@ -56,6 +57,7 @@ export default class TestExe extends LightningElement {
     wiredQuestions({ error, data }) {
         if (data) {
             this.data = JSON.parse(JSON.stringify(data));
+            this.maxindex = this.data.length-1;
             this.error = undefined;
             this.questionIndex = 0;
             this.navigationHelper();
