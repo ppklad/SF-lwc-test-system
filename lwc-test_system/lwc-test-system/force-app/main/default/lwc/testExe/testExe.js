@@ -8,7 +8,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { updateRecord } from 'lightning/uiRecordApi';
 
 export default class TestExe extends LightningElement {
-    @api recordId;
+    @api recordid;
     
     @track error;   
     @track showrightanswer=false;
@@ -19,10 +19,11 @@ export default class TestExe extends LightningElement {
     progress;
     test;
     testr;
+    maxindex = 0;
     localmode = true;
     // progress_ring_class = "slds-progress-ring slds-progress-ring_large";
 
-    @wire(getTestId, {testId: '$recordId'})
+    @wire(getTestId, {testId: '$recordid'})
     wiredTestId({ error, data }){
         if (data) {
             this.testId = data.Test__c;
@@ -56,6 +57,7 @@ export default class TestExe extends LightningElement {
     wiredQuestions({ error, data }) {
         if (data) {
             this.data = JSON.parse(JSON.stringify(data));
+            this.maxindex = this.data.length-1;
             this.error = undefined;
             this.questionIndex = 0;
             this.navigationHelper();
@@ -107,7 +109,10 @@ export default class TestExe extends LightningElement {
         // eslint-disable-next-line no-console
         console.log(">>> fin:"+JSON.stringify(this.testr.Answer_results__r));
     }
-
+    handleSliderChange(event){
+        this.questionIndex = event.target.value;
+        this.navigationHelper();
+    }
     
     
     

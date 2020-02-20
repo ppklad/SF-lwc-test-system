@@ -5,25 +5,3 @@
     margin-right: auto;
 }
 
-.test-tile:hover .slds-card {
-    border: 1px solid #121096;
-    background-color: #f5ebe1;
-}
-
-.test-tile .slds-card {
-    border: 1px solid hsl(224, 57%, 59%);
-    background-color: #fbf6f0;
-    transition: border 0.5s, background-color 0.5s;
-}
-
-.test-tile .slds-card__header {
-    padding: .5rem 1rem;
-    border-bottom: 2px solid #5da3d2;
-    border-radius: 4px 4px 0 0;
-    background-color: #5dbbd278;
-    color: #000000;
-}
-
-.test-tile-button {
-    fill: #391953;
-}
